@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let personSchema = new Schema({
-    name: {
+    firstname: {
         type: String,
         required: "Le nom est requis"
     },
@@ -11,13 +11,11 @@ let personSchema = new Schema({
         required: "Le prénom est requis"
     },
     group_id :{
-        type: String,
-        required: true
+        type: String
     },
 
     person_givname: {
-        type: String,
-        required: true
+        type: String
     }
 
 });

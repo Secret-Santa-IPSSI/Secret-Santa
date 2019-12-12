@@ -2,17 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let giftSchema = new Schema({
-    name: {
+    label: {
         type: String,
-        required: "Le nom est requis"
+        required: "Le libellé est requis"
     },
-    link: {
+    details: {
         type: String,
-        required: "Le message est requis"
-    },
-    created_at : {
-        type: Date,
-        default: Date.now
+        required: "Des précisions sont requises"
     },
     person_id: {
         type: String,

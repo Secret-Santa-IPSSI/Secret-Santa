@@ -1,7 +1,7 @@
 module.exports = (app) => {
     const giftController = require('../controllers/giftController');
 
-    app.route('/person/:person_id/gifts')
+    app.route('/persons/:person_id/gifts')
         .get(giftController.get_all_gifts)
         .post(giftController.create_a_gift);
 

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const giftModel = require('../models/giftModel');
-const Comment = mongoose.model("Gift");
+const Gift = mongoose.model("Gift");
 
 exports.get_all_gifts = (req, res) => {
-    Comment.find({post_id: req.params.post_id}, (error, posts) => {
+    Gift.find({person_id: req.params.person_id}, (error, gifts) => {
         if(error){
             res.status(500);
             console.log(error);
@@ -11,16 +11,16 @@ exports.get_all_gifts = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(posts);
+            res.json(gifts);
         }
     })
 }
 
 exports.create_a_gift = (req, res) => {
-    req.body.post_id = req.params.post_id;
-    let new_comment = new Comment(req.body);
+    req.body.person_id = req.params.person_id;
+    let new_gift = new Gift(req.body);
 
-    new_comment.save((error, post) => {
+    new_gift.save((error, gift) => {
         if(error){
             res.status(500);
             console.log(error);
@@ -28,13 +28,13 @@ exports.create_a_gift = (req, res) => {
         }
         else {
             res.status(201);
-            res.json(post);
+            res.json(gift);
         }
     })
 }
 
 exports.get_a_gift = (req, res) => {
-    Comment.findById(req.params.comment_id, (error, comment) => {
+    Gift.findById(req.params.gift_id, (error, gift) => {
         if(error){
             res.status(500);
             console.log(error);
@@ -42,13 +42,13 @@ exports.get_a_gift = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(comment);
+            res.json(gift);
         }
     })
 }
 
 exports.update_a_gift = (req, res) => {
-    Comment.findOneAndUpdate({_id: req.params.comment_id}, req.body, {new: true}, (error, comment) => {
+    Gift.findOneAndUpdate({_id: req.params.gift_id}, req.body, {new: true}, (error, gift) => {
         if(error){
             res.status(500);
             console.log(error);
@@ -56,13 +56,13 @@ exports.update_a_gift = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(comment);
+            res.json(gift);
         }
     })
 }
 
 exports.delete_a_gift = (req, res) => {
-    Comment.remove({_id: req.params.comment_id}, (error) => {
+    Gift.remove({_id: req.params.gift_id}, (error) => {
         if(error){
             res.status(500);
             console.log(error);
@@ -70,7 +70,7 @@ exports.delete_a_gift = (req, res) => {
         }
         else {
             res.status(200);
-            res.json({message: "Commentaires supprimé"});
+            res.json({message: "Suppression effectuée avec succès"});
         }
     })
 }

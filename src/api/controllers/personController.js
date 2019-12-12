@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const personModel = require('../models/personModel');
-const Post = mongoose.model("Person");
+const Person = mongoose.model("Person");
 
 exports.list_all_persons =  (req, res) => {
-    Post.find({}, (error, posts) => {
+    Person.find({}, (error, person) => {
         if (error) {
             res.status(500);
             console.log(error);
@@ -11,15 +11,15 @@ exports.list_all_persons =  (req, res) => {
         }
         else {
             res.status(200);
-            res.json(posts);
+            res.json(person);
         }
     })
 };
 
 exports.create_a_person = (req, res) => {
-    let new_post = new Post(req.body);
+    let new_person = new Person(req.body);
 
-    new_post.save((error, post) => {
+    new_person.save((error, person) => {
         if(error) {
             res.status(500);
             console.log(error);
@@ -27,13 +27,13 @@ exports.create_a_person = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(post);
+            res.json(person);
         }
     })
 };
 
 exports.get_a_person = (req, res) => {
-    Post.findById(req.params.post_id, (error, post) => {
+    Person.findById(req.params.person_id, (error, person) => {
         if(error){
             res.status(500);
             console.log(error);
@@ -41,26 +41,26 @@ exports.get_a_person = (req, res) => {
         }
         else {
             res.status(200);
-            res.json(post);
+            res.json(person);
         }
     })
 }
 
 exports.update_a_person = (req, res) => {
-    Post.findOneAndUpdate({_id: req.params.post_id}, req.body, {new: true}, (error, post) => {
+    Person.findOneAndUpdate({_id: req.params.person_id}, req.body, {}, (error) => {
         if(error){
             res.status(500);
             console.log(error);
             res.json({message: "Server error"});
         }else {
             res.status(200);
-            res.json('Update successfully');
+            res.json('Successfully update');
         }
     });
 };
 
 exports.delete_a_person = (req, res) => {
-    Post.remove({_id: req.params.post_id}, (error) => {
+    Person.remove({_id: req.params.person_id}, (error) => {
         if(error){
             res.status(500);
             console.log(error);
