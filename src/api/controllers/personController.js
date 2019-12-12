@@ -7,7 +7,7 @@ exports.list_all_persons =  (req, res) => {
         if (error) {
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -23,7 +23,7 @@ exports.create_a_person = (req, res) => {
         if(error) {
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur"});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -37,7 +37,7 @@ exports.get_a_person = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -47,14 +47,14 @@ exports.get_a_person = (req, res) => {
 }
 
 exports.update_a_person = (req, res) => {
-    Person.findOneAndUpdate({_id: req.params.person_id}, req.body, {}, (error) => {
+    Person.findOneAndUpdate({_id: req.params.person_id}, req.body, {}, (error, person) => {
         if(error){
             res.status(500);
             console.log(error);
             res.json({message: "Server error"});
         }else {
             res.status(200);
-            res.json('Successfully update');
+            res.json(person);
         }
     });
 };
@@ -67,7 +67,7 @@ exports.delete_a_person = (req, res) => {
             res.json({message: "Server error"});
         }else{
             res.status(200);
-            res.json({message: 'Article supprimé'});
+            res.json({message: 'Person removed'});
         }
     });
 };

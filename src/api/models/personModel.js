@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 let personSchema = new Schema({
     firstname: {
         type: String,
-        required: "Le nom est requis"
+        required: "Firstname is required"
     },
     lastname: {
         type: String,
-        required: "Le prénom est requis"
+        required: "Lastname is required"
     },
     email: {
         type: String,

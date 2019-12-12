@@ -9,7 +9,7 @@ exports.list_all_groups =  (req, res) => {
         if (error) {
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -23,7 +23,7 @@ exports.get_group_members = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -39,7 +39,7 @@ exports.create_a_group = (req, res) => {
         if(error) {
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur"});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -53,7 +53,7 @@ exports.get_a_group = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -83,7 +83,7 @@ exports.delete_a_group = (req, res) => {
             res.json({message: "Server error"});
         }else{
             res.status(200);
-            res.json({message: 'Groupe supprimé'});
+            res.json({message: 'Group removed'});
         }
     });
 };
@@ -93,7 +93,7 @@ exports.randomize = (req, res) => {
         if (error) {
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         } else {
             var idList = [];
 

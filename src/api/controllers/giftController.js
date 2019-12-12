@@ -7,7 +7,7 @@ exports.get_all_gifts = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -24,7 +24,7 @@ exports.create_a_gift = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(201);
@@ -38,7 +38,7 @@ exports.get_a_gift = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -52,7 +52,7 @@ exports.update_a_gift = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
@@ -66,11 +66,11 @@ exports.delete_a_gift = (req, res) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
-            res.json({message: "Suppression effectuée avec succès"});
+            res.json({message: "Gift removed"});
         }
     })
 }

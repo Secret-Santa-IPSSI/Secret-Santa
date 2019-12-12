@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 let giftSchema = new Schema({
     label: {
         type: String,
-        required: "Le libellé est requis"
+        required: "Label is required"
     },
     details: {
         type: String,
-        required: "Des précisions sont requises"
+        required: "Details are required"
     },
     person_id: {
         type: String,
