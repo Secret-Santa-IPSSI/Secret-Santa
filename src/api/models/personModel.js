@@ -2,22 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let personSchema = new Schema({
-    name: {
+    firstname: {
         type: String,
-        required: "Le nom est requis"
+        required: "Firstname is required"
     },
     lastname: {
         type: String,
-        required: "Le prénom est requis"
+        required: "Lastname is required"
     },
-    group_id :{
+    email: {
         type: String,
-        required: true
+    },
+    group_id:{
+        type: String
     },
 
-    person_givname: {
-        type: String,
-        required: true
+    id_person_to_give: {
+        type: String
     }
 
 });

@@ -1,8 +1,12 @@
-version: "3"
+version: "3.6"
 services:
   app:
-    restart: always
-    build: .
+    image: 'node:latest'
+    working_dir: /home/node/app
+    command:
+      - /bin/sh
+      - '-c'
+      - 'npm install && npm start'
     ports:
       - "3000:3000"
     links:
@@ -10,7 +14,7 @@ services:
     networks:
       - my-network
     volumes:
-      - ./src:/usr/src/app
+      - './src:/home/node/app'
   mongo:
     container_name: mongo
     image: mongo

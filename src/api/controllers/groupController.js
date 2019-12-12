@@ -1,73 +1,120 @@
 const mongoose = require('mongoose');
 const groupModel = require('../models/groupModel');
-const Post = mongoose.model("Group");
+const Group = mongoose.model("Group");
+const personModel = require('../models/personModel');
+const Person = mongoose.model("Person");
 
 exports.list_all_groups =  (req, res) => {
-    Post.find({}, (error, posts) => {
+    Group.find({}, (error, groups) => {
         if (error) {
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
-            res.json(posts);
+            res.json(groups);
         }
     })
 };
 
-exports.create_a_group = (req, res) => {
-    let new_post = new Post(req.body);
-
-    new_post.save((error, post) => {
-        if(error) {
+exports.get_group_members = (req, res) => {
+    Person.find({group_id: req.params.group_id}, (error, person) => {
+        if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur"});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
-            res.json(post);
+            res.json(person);
+        }
+    })
+}
+
+exports.create_a_group = (req, res) => {
+    let new_group = new Group(req.body);
+
+    new_group.save((error, group) => {
+        if(error) {
+            res.status(500);
+            console.log(error);
+            res.json({message: "Server error"});
+        }
+        else {
+            res.status(200);
+            res.json(group);
         }
     })
 };
 
 exports.get_a_group = (req, res) => {
-    Post.findById(req.params.post_id, (error, post) => {
+    Group.findById(req.params.group_id, (error, group) => {
         if(error){
             res.status(500);
             console.log(error);
-            res.json({message: "Erreur serveur."});
+            res.json({message: "Server error"});
         }
         else {
             res.status(200);
-            res.json(post);
+            res.json(group);
         }
     })
 }
 
 exports.update_a_group = (req, res) => {
-    Post.findOneAndUpdate({_id: req.params.post_id}, req.body, {new: true}, (error, post) => {
+    Group.findOneAndUpdate({_id: req.params.group_id}, req.body, {new: true}, (error, group) => {
         if(error){
             res.status(500);
             console.log(error);
             res.json({message: "Server error"});
         }else {
             res.status(200);
-            res.json('Groupe mis à jour');
+            res.json(req.body);
         }
     });
 };
 
 exports.delete_a_group = (req, res) => {
-    Post.remove({_id: req.params.post_id}, (error) => {
+    Group.remove({_id: req.params.group_id}, (error) => {
         if(error){
             res.status(500);
             console.log(error);
             res.json({message: "Server error"});
         }else{
             res.status(200);
-            res.json({message: 'Groupe supprimé'});
+            res.json({message: 'Group removed'});
         }
     });
 };
+
+exports.randomize = (req, res) => {
+    Person.find({group_id: req.params.group_id}, (error, person) => {
+        if (error) {
+            res.status(500);
+            console.log(error);
+            res.json({message: "Server error"});
+        } else {
+            var idList = [];
+
+            person.forEach(function(onePerson){
+                idList.push(onePerson._id);
+            });
+
+            person.forEach(function(onePerson){
+                key = Math.trunc(Math.random() * idList.length);
+
+                Person.findOneAndUpdate({_id: onePerson._id}, {id_person_to_give: idList[key]}, {}, (error) => {
+                    if(error){
+                        console.log(error);
+                    }
+                });
+
+                idList.splice(key, 1);
+            });
+
+            res.status(200);
+            res.json("Randomized");
+        }
+    })
+}

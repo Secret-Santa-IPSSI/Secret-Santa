@@ -17,6 +17,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true} ));
 app.use(bodyParser.json())
 
+const cors = require('cors')
+app.use(cors())
+
 const personRoute = require('./api/routes/personRoute');
 const giftRoute = require('./api/routes/giftRoute');
 const groupRoute = require('./api/routes/groupRoute');
