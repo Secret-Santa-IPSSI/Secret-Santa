@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const groupModel = require('../models/groupModel');
-const Post = mongoose.model("Group");
+const personModel = require('../models/personModel');
+const Post = mongoose.model("Person");
 
-exports.list_all_groups =  (req, res) => {
+exports.list_all_persons =  (req, res) => {
     Post.find({}, (error, posts) => {
         if (error) {
             res.status(500);
@@ -16,7 +16,7 @@ exports.list_all_groups =  (req, res) => {
     })
 };
 
-exports.create_a_group = (req, res) => {
+exports.create_a_person = (req, res) => {
     let new_post = new Post(req.body);
 
     new_post.save((error, post) => {
@@ -32,7 +32,7 @@ exports.create_a_group = (req, res) => {
     })
 };
 
-exports.get_a_group = (req, res) => {
+exports.get_a_person = (req, res) => {
     Post.findById(req.params.post_id, (error, post) => {
         if(error){
             res.status(500);
@@ -46,7 +46,7 @@ exports.get_a_group = (req, res) => {
     })
 }
 
-exports.update_a_group = (req, res) => {
+exports.update_a_person = (req, res) => {
     Post.findOneAndUpdate({_id: req.params.post_id}, req.body, {new: true}, (error, post) => {
         if(error){
             res.status(500);
@@ -54,12 +54,12 @@ exports.update_a_group = (req, res) => {
             res.json({message: "Server error"});
         }else {
             res.status(200);
-            res.json('Groupe mis à jour');
+            res.json('Update successfully');
         }
     });
 };
 
-exports.delete_a_group = (req, res) => {
+exports.delete_a_person = (req, res) => {
     Post.remove({_id: req.params.post_id}, (error) => {
         if(error){
             res.status(500);
@@ -67,7 +67,7 @@ exports.delete_a_group = (req, res) => {
             res.json({message: "Server error"});
         }else{
             res.status(200);
-            res.json({message: 'Groupe supprimé'});
+            res.json({message: 'Article supprimé'});
         }
     });
 };
