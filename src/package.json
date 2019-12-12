@@ -5,7 +5,7 @@
   "main": "./app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon --legacy-watch app.js"
   },
   "repository": {
     "type": "git",
@@ -19,12 +19,9 @@
   },
   "homepage": "https://github.com/BuyukCem/docker_node_mongo",
   "dependencies": {
-    "mongoose": "^5.8.0",
-    "express": "^4.17.1",
     "body-parser": "^1.19.0",
-    "nodemon": "^2.0.1"
-
-
-
+    "express": "^4.17.1",
+    "mongoose": "^5.8.0",
+    "nodemon": "^2.0.2"
   }
 }
