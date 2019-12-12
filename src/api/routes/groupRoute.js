@@ -10,6 +10,9 @@ module.exports = (app) => {
         .put(groupController.update_a_group)
         .delete(groupController.delete_a_group);
 
-        app.route('/group/:group_id/members')
+    app.route('/group/:group_id/members')
         .get(groupController.get_group_members);
+
+    app.route('/group/:group_id/randomize')
+        .get(groupController.randomize);
 }

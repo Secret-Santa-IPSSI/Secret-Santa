@@ -70,7 +70,7 @@ exports.update_a_group = (req, res) => {
             res.json({message: "Server error"});
         }else {
             res.status(200);
-            res.json('Groupe mis à jour');
+            res.json(req.body);
         }
     });
 };
@@ -87,3 +87,34 @@ exports.delete_a_group = (req, res) => {
         }
     });
 };
+
+exports.randomize = (req, res) => {
+    Person.find({group_id: req.params.group_id}, (error, person) => {
+        if (error) {
+            res.status(500);
+            console.log(error);
+            res.json({message: "Erreur serveur."});
+        } else {
+            var idList = [];
+
+            person.forEach(function(onePerson){
+                idList.push(onePerson._id);
+            });
+
+            person.forEach(function(onePerson){
+                key = Math.trunc(Math.random() * idList.length);
+
+                Person.findOneAndUpdate({_id: onePerson._id}, {id_person_to_give: idList[key]}, {}, (error) => {
+                    if(error){
+                        console.log(error);
+                    }
+                });
+
+                idList.splice(key, 1);
+            });
+
+            res.status(200);
+            res.json("Randomized");
+        }
+    })
+}

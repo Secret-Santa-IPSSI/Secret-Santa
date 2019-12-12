@@ -10,11 +10,14 @@ let personSchema = new Schema({
         type: String,
         required: "Le prénom est requis"
     },
-    group_id :{
+    email: {
+        type: String,
+    },
+    group_id:{
         type: String
     },
 
-    person_givname: {
+    id_person_to_give: {
         type: String
     }
 
