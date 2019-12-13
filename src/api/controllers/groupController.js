@@ -102,9 +102,17 @@ exports.randomize = (req, res) => {
             });
 
             person.forEach(function(onePerson){
-                key = Math.trunc(Math.random() * idList.length);
 
-                Person.findOneAndUpdate({_id: onePerson._id}, {id_person_to_give: idList[key]}, {}, (error) => {
+                var idSelect;
+
+                if (person.length >= 2) {
+                    do {
+                        key = Math.trunc(Math.random() * idList.length);
+                        idSelect = idList[key];
+                    } while (idSelect === onePerson._id)
+                }
+
+                Person.findOneAndUpdate({_id: onePerson._id}, {id_person_to_give: idSelect}, {}, (error) => {
                     if(error){
                         console.log(error);
                     }
