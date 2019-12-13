@@ -47,7 +47,7 @@ exports.get_a_person = (req, res) => {
 }
 
 exports.update_a_person = (req, res) => {
-    Person.findOneAndUpdate({_id: req.params.person_id}, req.body, {}, (error, person) => {
+    Person.findOneAndUpdate({_id: req.params.person_id}, req.body, {new: true}, (error, person) => {
         if(error){
             res.status(500);
             console.log(error);
